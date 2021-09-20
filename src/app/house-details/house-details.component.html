@@ -1,0 +1,63 @@
+<div class="container" *ngIf="member">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 mt-5">
+            <h4 class="text-center">House Details</h4>
+            <mat-card>
+
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <p> House No:{{member.houseNo}}</p>
+                    </div>
+                    <div class="col-6 text-end">
+                        <p>Address: {{member.houseAddress}}</p>
+
+                    </div>
+                </div>
+
+
+                <mat-card-content>
+
+                    <div class="row">
+                        <div class="col-5  m-4 p-2 border rounded" *ngFor="let person of member.members"
+                            [ngClass]="{'bg-danger':person.age>=60, 'bg-success':person.age<60}">
+
+
+                            <p>Name:
+                                <strong class="text-end"> {{person.name}} </strong>
+                            </p>
+
+                            <p>
+                                Age: <strong>{{person.age}} </strong>
+                            </p>
+                            <p>
+                                Gender:<strong>{{person.gender}} </strong>
+                            </p>
+
+
+
+                        </div>
+
+                    </div>
+                    <div class="m-4">
+                        <p> <span class="badge rounded-pill bg-danger text-danger">.</span> High Risk (age above 60)</p>
+                        <p> <span class="badge rounded-pill bg-success text-success">.</span> Low Risk (age below 60)
+                        </p>
+                    </div>
+
+                </mat-card-content>
+                <div class="row">
+                    <div class="col-6">
+                        <button mat-stroked-button type="button" [routerLink]="['/house-details',member.id,'edit']"
+                            class="w-100">Edit</button>
+                    </div>
+                    <div class="col-6">
+                        <button mat-stroked-button type="button" (click)="deleteMembers()" class="w-100">delete</button>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
+    </div>
+</div>

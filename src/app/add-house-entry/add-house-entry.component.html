@@ -1,0 +1,114 @@
+<div class="container ">
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-8 col-12">
+            <mat-card>
+
+                <mat-card-title style="text-align: left;">Add your Entries</mat-card-title>
+
+                <mat-card-content>
+                    <form class="app-form" [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                            <mat-form-field appearance="outline" class="w-100">
+
+                                <mat-label>House Number</mat-label>
+                                <input type="text" matInput formControlName="houseNo">
+                                <mat-error *ngIf="surveyForm.get('houseNo').errors?.required">House no is required
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field appearance="outline" class="w-100">
+
+                                <mat-label>House Address</mat-label>
+                                <input type="text" matInput formControlName="houseAddress">
+                                <mat-error *ngIf="surveyForm.get('houseAddress').errors?.required">House address is
+                                    required</mat-error>
+                                <mat-error
+                                    *ngIf="surveyForm.get('houseAddress').errors?.minlength || surveyForm.get('houseAddress').errors?.maxlength">
+                                    House address should between 5 to 40 characters.</mat-error>
+
+
+                            </mat-form-field>
+                        </div>
+
+
+                        <div formArrayName="members" *ngFor="let member of members.controls; let i=index">
+                            <div [formGroupName]="i">
+                                <hr>
+                                <div class="row ">
+                                    <p class=" col-6 ">Member-{{i+1}}</p>
+                                    <span class="col-6 " style="text-align: right;">
+
+
+                                        <button type="button" (click)="deleteMember(i,members.length)" mat-icon-button
+                                            color="warn">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </span>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Name</mat-label>
+                                        <input type="text" matInput formControlName="name">
+                                        <mat-error *ngIf="member.get('name').errors?.required">Name is required
+                                        </mat-error>
+                                        <mat-error
+                                            *ngIf="member.get('name').errors?.minlength || member.get('name').errors?.maxlength">
+                                            Name should be between 3 to 32 characters.</mat-error>
+
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Age</mat-label>
+                                        <input type="number" matInput formControlName="age">
+                                        <mat-error *ngIf="member.get('age').errors?.required">Age is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select formControlName="gender">
+                                            <!-- <mat-option value="" disabled> Choose Gender</mat-option> -->
+                                            <mat-option value="Male">Male</mat-option>
+                                            <mat-option value="Female">Female</mat-option>
+
+                                        </mat-select>
+                                        <mat-error *ngIf="member.get('gender').errors?.required">Gender is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-2 mb-3">
+
+
+                            <button mat-icon-button color="primary" (click)="addMember()" [disabled]="!members.valid">
+                                <mat-icon>plus_one</mat-icon>
+                            </button>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <button mat-raised-button color="primary" type="submit" [disabled]="!surveyForm.valid"
+                                    class="w-100">Submit</button>
+                            </div>
+                            <div class="form-group col-6">
+                                <button mat-raised-button type="reset" class="w-100 btn-secondary">Reset</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

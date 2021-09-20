@@ -1,0 +1,119 @@
+<div class="container ">
+
+
+
+    <div class="row justify-content-center   ">
+
+
+        <div class="col-12 col-md-10 mt-3 mb-2 ">
+            <div class="row ">
+                <div class="col-9 col-md-8 " style="text-align:left;">
+                    <h2>Details of Houses</h2>
+                </div>
+                <div class="col-3  col-md-4 " style="text-align:right;">
+                    <button mat-raised-button class=" my-2 w-100 btn-outline-secondary " (click)="onAdd()">Add House
+                        Entry</button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class=" col-12 col-md-10">
+
+            <div *ngFor="let memberss of members; let i = index">
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle class="p-2 ">
+                        <mat-expansion-panel-header>
+                            <div class="col-1 p-2" style="text-align: left;">
+                                <p class="fw-bold">{{i+1}}</p>
+
+                            </div>
+
+                            <div class="col-3 p-2">
+                                <span class="fw-lighter" style="text-align:left"> House No:</span>{{memberss.houseNo}}
+
+                            </div>
+
+                            <div class="col-3 p-2  ">
+                                <span class="fw-lighter"> Members:</span>
+                                {{memberss.members.length}}
+
+
+                            </div>
+
+
+
+
+                            <div class="col-4 p-2 ">
+                                <!-- <div class="col-12"> -->
+                                <p class="fw-lighter mb-0" style="text-align:left">
+                                    Address:</p>{{memberss.houseAddress}}
+                                <!-- </div> -->
+                            </div>
+                            <div class="col-1 p-2">
+                                <span *ngIf="displayRisk(memberss.id); else  greenBlock"
+                                    class="badge rounded-pill bg-danger text-danger ">.</span>
+                                <ng-template #greenBlock>
+                                    <span class="badge rounded-pill bg-success text-success ">.</span>
+                                </ng-template>
+
+                            </div>
+
+
+
+                        </mat-expansion-panel-header>
+                        <div *ngFor="let person of memberss.members; let i= index">
+                            <div class="row" [routerLink]="['/house-details',memberss.id]" style="cursor: pointer;">
+                                <div class="col-12"> <span class="fw-bold"> Member:{{i+1}}</span></div>
+                                <div class="col-4 mt-1" *ngIf="person.age>=60">
+                                    <p> <span class="fw-lighter">Name:</span>{{person.name}} <span
+                                            class="badge rounded-pill bg-danger text-danger">.</span></p>
+
+                                </div>
+                                <div class="col-4 mt-1" *ngIf="person.age<60">
+                                    <p> <span class="fw-lighter">Name:</span>{{person.name}} <span
+                                            class="badge rounded-pill bg-success text-success">.</span></p>
+
+                                </div>
+                                <div class="col-4">
+                                    <p><span class="fw-lighter">Age:</span>{{person.age}} </p>
+
+                                </div>
+
+                                <div class="col-4">
+                                    <p><span class="fw-lighter ">Gender:</span>{{person.gender}}</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<!-- <div *ngFor="let memberss of members">
+    <table>
+        <td>{{memberss.houseNo}}</td>
+        <td>{{memberss.houseAddress}}</td>
+        <div *ngFor="let person of memberss.members">
+            <table>
+                <td>{{person.name}}</td>
+                <td>{{person.age}}</td>
+                <td>{{person.gender}}</td>
+            </table>
+        </div>
+    </table>
+</div> -->
